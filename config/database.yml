@@ -25,7 +25,9 @@ development:
   <<: *default
   username: postgres
   host: localhost
+  password: 1
   database: TodoBackend_development
+  port: 5432
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -61,7 +63,9 @@ test:
   <<: *default
   username: postgres
   host: localhost
+  password: 1
   database: TodoBackend_test
+  port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
