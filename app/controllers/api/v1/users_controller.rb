@@ -17,6 +17,7 @@ class Api::V1::UsersController < ApplicationController
       render json: { errors: user.errors.messages }, status: 422
     end
   end
+
   def update
     user = User.find(params[:id])
     if user.update params.permit(:first_name, :last_name)
@@ -24,8 +25,8 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { errors: user.errors.messages }, status: 422
     end
-
   end
+
   def destroy
     user = user.find(params[:id])
     user.destroy
