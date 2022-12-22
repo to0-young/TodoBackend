@@ -12,18 +12,18 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.new params.permit(:first_name, :last_name, :email, :password)
     if user.save
-      render json: user, status: 201
+      render json: user, status: :created
     else
-      render json: { errors: user.errors.messages }, status: 422
+      render json: { errors: user.errors.messages }, status: :unprocessable_entity
     end
   end
 
   def update
     user = User.find(params[:id])
     if user.update params.permit(:first_name, :last_name)
-      render json: user, status: 200
+      render json: user, status: :ok
     else
-      render json: { errors: user.errors.messages }, status: 422
+      render json: { errors: user.errors.messages }, status: :unprocessable_entity
     end
   end
 
