@@ -1,6 +1,6 @@
 require "faker"
 
-5.times do |n|
+1.times do |n|
   # user = User.new(
   #   first_name: "jonny",
   #   last_name: "joo",

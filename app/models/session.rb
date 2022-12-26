@@ -1,4 +1,8 @@
 class Session < ApplicationRecord
-  validates :expiration
-  validates :token
+  validates  :expiration , presence: true
+  validates :token , presence: true
+
+  belongs_to :user
 end
+
+
