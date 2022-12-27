@@ -1,6 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
-  before_action only: [:destroy] do
-       authenticate_cookie
+
      end
   def index
     user = User.find_by_id(session[:user_id])
@@ -31,14 +30,14 @@ class Api::V1::SessionsController < ApplicationController
         return render json: { message: 'Password not valid' }, status: 401
       end
     end
+    exp = 24.hours.from_now
+    session = Session.create!(expiration: exp, user_id: user.i)
 
     # зашифрувати її за допомогою jwt із експірейшеном в 1 день (далі токен)
-    exp = 24.hours.from_now
-    exp_payload = { user_id: user.id, exp: exp.to_i }
+    exp_payload = { session_id: session.id}
     token = JWT.encode(exp_payload, Rails.application.credentials[:jwt_secret], 'HS256')
 
     # створити сесію з експірейшеном в 1 день
-    session = Session.create!(expiration: exp, user_id: user.id, token: token)
 
     # засетити цей токен в куки
     cookies[:session] = { value: token, expires: 24.hours }
@@ -56,5 +55,5 @@ class Api::V1::SessionsController < ApplicationController
         render json: {status: 'session not found', code: 404}
       end
   end
-end
+
 
