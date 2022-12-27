@@ -1,15 +1,14 @@
 class Api::V1::SessionsController < ApplicationController
 
-     end
-  def index
-    user = User.find_by_id(session[:user_id])
-  end
-  def shows
-    # begin
-    #   decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
-    # rescue JWT::ExpiredSignature
-    #   # Handle expired token, e.g. logout user or deny access
-    # end
+  def show
+    token = cookies[:session]
+    begin
+      decoded_token = JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
+      session_id = decoded_token[0]['session_id']
+      session = Session.find_by_id(session.user)
+    rescue JWT::ExpiredSignature
+      # Handle expired token, e.g. logout user or deny access
+    end
   end
 
   def create
@@ -31,13 +30,12 @@ class Api::V1::SessionsController < ApplicationController
       end
     end
     exp = 24.hours.from_now
-    session = Session.create!(expiration: exp, user_id: user.i)
+    # створити сесію з експірейшеном в 1 день
+    session = Session.create!(expiration: exp, user_id: user.id)
 
     # зашифрувати її за допомогою jwt із експірейшеном в 1 день (далі токен)
-    exp_payload = { session_id: session.id}
+    exp_payload = { session_id: session.id }
     token = JWT.encode(exp_payload, Rails.application.credentials[:jwt_secret], 'HS256')
-
-    # створити сесію з експірейшеном в 1 день
 
     # засетити цей токен в куки
     cookies[:session] = { value: token, expires: 24.hours }
@@ -47,13 +45,13 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def destroy
-      user = user
-      if user
-        cookies.delete(:jwt)
-        render json: {status: 'OK', code: 200}
-      else
-        render json: {status: 'session not found', code: 404}
-      end
+    user = user
+    if user
+      cookies.delete(:jwt)
+      render json: {status: 'OK', code: 200}
+    else
+      render json: {status: 'session not found', code: 404}
+    end
   end
-
+end
 
