@@ -5,12 +5,12 @@ class Api::V1::SessionsController < ApplicationController
     begin
       decoded_token = JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
       session_id = decoded_token[0]['session_id']
-      session = Session.find_by_id(session.user)
+      session = Session.find_by_id(session_id)
+      render json: {session: session, user: session.user }
     rescue JWT::ExpiredSignature
       # Handle expired token, e.g. logout user or deny access
     end
   end
-
   def create
     if !cookies[:session].blank?
       return render json: { message: 'Session already active' }, status: 401
@@ -41,7 +41,7 @@ class Api::V1::SessionsController < ApplicationController
     cookies[:session] = { value: token, expires: 24.hours }
 
     # повернути 201 респонс із меседжом, що все добре
-    return render json: { message: 'Session created' }, status: 201
+     render json: { message: 'Session created' }, status: 201
   end
 
   def destroy
