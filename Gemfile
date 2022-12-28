@@ -5,6 +5,8 @@ ruby "3.1.2"
 
 # jwt sessions
 gem 'jwt'
+# Connecting the heme cellalyzer
+gem 'active_model_serializers', '~> 0.10.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
