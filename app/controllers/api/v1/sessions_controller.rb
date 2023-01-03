@@ -1,15 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
   def show
-    token = cookies[:session]
-    begin
-      decoded_token = JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
-      session_id = decoded_token[0]['session_id']
-      session = Session.find_by_id(session_id)
-      render json: ActiveModelSerializers::SerializableResource.new(session).to_json
-    rescue JWT::ExpiredSignature
-      # Handle expired token, e.g. logout user or deny access
-    end
+    return session_empty! if current_session.nil?
+    render json: ActiveModelSerializers::SerializableResource.new(current_session).to_json
   end
+
   def create
     if !cookies[:session].blank?
       return render json: { message: 'Session already active' }, status: 401
