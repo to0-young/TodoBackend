@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       return nil if token.nil?
       decoded_token = JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
       session_id = decoded_token[0]['session_id']
-      Session.find_by_id(session_id)
+      Session.where('expiration > ?', DateTime.now).find_by_id(session_id)
     end
   end
 

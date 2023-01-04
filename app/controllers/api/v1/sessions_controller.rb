@@ -8,12 +8,12 @@ class Api::V1::SessionsController < ApplicationController
     if !cookies[:session].blank?
       return render json: { message: 'Session already active' }, status: 401
     end
-
     # знайти_юзера в БД по імейлу з параметрів
-    # якщо юзер ніл, то відіслати 404 статус із словами, що такого юзер немає
     user = User.find_by_email(params[:email])
-    # перевірити чи пароль, який ти надаєш співпадає з паролем знайденого юзера в БД
+    #
+    # якщо юзер ніл, то відіслати 404 статус із словами, що такого юзер немає
     if user.nil?
+      # перевірити чи пароль, який ти надаєш співпадає з паролем знайденого юзера в БД
       return render json: { message: "There is no such user" }, status: 404
     else
       correct_password = user.authenticate(params[:password])
@@ -34,17 +34,20 @@ class Api::V1::SessionsController < ApplicationController
     cookies[:session] = { value: token, expires: 24.hours }
 
     # повернути 201 респонс із меседжом, що все добре
-     render json: { message: 'Session created' }, status: 201
+     render json: ActiveModelSerializers::SerializableResource.new(current_session).to_json, status: 201
   end
 
   def destroy
-    user = user
-    if user
-      cookies.delete(:jwt)
-      render json: {status: 'OK', code: 200}
-    else
-      render json: {status: 'session not found', code: 404}
+    # якщо карент сесії немає - повернути 401 статус з меседжом session missing
+    if current_session.nil?
+      return render json: { message: 'Session missing' }, status: 401
     end
+    # ЗААПДЕЙТИТИ КАРЕНТ СЕШЕН EXPIRATION DateTime.now
+    current_session.update(expiration: DateTime.now)
+    # видалити сесію з куки
+    cookies.delete(:session)
+    # повернути 200 статус
+    render json: { message: 'ок' }, status: 200
   end
 end
 
