@@ -1,7 +1,8 @@
 class Api::V1::TasksController < ApplicationController
 
   def index
-    tasks = Task.where(user_id: current_session.user_id)
+    # tasks = Task.where(user_id: current_session.user_id)
+    tasks = current_user.tasks
     render json: ActiveModelSerializers::SerializableResource.new(tasks).to_json, status: :ok
   end
 
@@ -29,8 +30,9 @@ class Api::V1::TasksController < ApplicationController
   #
 
   def destroy
-    task = task.find(params[:id])
-    task.destroy
+    task = current_user.tasks.find(params[:id])
+    # task = Task.find_by(id: params[:id], user_id: current_session.user_id)
+    task&.destroy
     render json: ActiveModelSerializers::SerializableResource.new(task).to_json, status: :ok
   end
 end

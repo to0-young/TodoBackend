@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    @current_user ||= current_session&.user
+  end
+
   def not_authorized!
     render json: { message: 'JWT decode error' }, status: 401
   end
