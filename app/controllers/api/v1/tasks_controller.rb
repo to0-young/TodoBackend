@@ -6,6 +6,11 @@ class Api::V1::TasksController < ApplicationController
     render json: ActiveModelSerializers::SerializableResource.new(tasks).to_json, status: :ok
   end
 
+  def show
+    task = Task.find(params[:id])
+    render json: ActiveModelSerializers::SerializableResource.new(task).to_json, status: :ok
+  end
+
   def create
     # task = current_session.user.tasks.new(params.permit(:title, :priority,  :description, :due_date))
     # task = Task.new(params.permit(:title, :priority,  :description, :due_date).merge(user_id: current_session.user_id))
@@ -21,13 +26,13 @@ class Api::V1::TasksController < ApplicationController
 
   # def update
   #   task = Task.find(params[:id])
-  #   if task.update params.permit(:title, :priority, :dueDate )
+  #   if task.update params.permit(:title, :priority, :description, :dueDate )
   #     render json: task, status: :ok
   #   else
   #     render json: { errors: task.errors.messages }, status: :unprocessable_entity
   #   end
   # end
-  #
+
 
   def destroy
     task = current_user.tasks.find(params[:id])
