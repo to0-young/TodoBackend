@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :task do
-    title { "MyString" }
-    description { "MyString" }
-    priority { "MyString" }
-    duedate { "MyString" }
+    title { Faker::Verb.base }
+    description { Faker::Markdown.emphasis }
+    priority { 1 }
+    due_date { 1.day.from_now }
+    user
   end
 end

@@ -1,4 +1,5 @@
 class Api::V1::TasksController < ApplicationController
+  before_action :authenticate!
 
   def index
     # tasks = Task.where(user_id: current_session.user_id)
