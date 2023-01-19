@@ -1,3 +1,6 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/to0-young/TodoBackend/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/to0-young/TodoBackend/tree/main)
+
+[MASTER_KEY](https://docs.google.com/document/d/1erv8-hVIIoxDAzDRjGqhpGs0Ww3sf4d5YPumJWXRMVg/edit)
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,5 +25,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-[MASTER_KEY](https://docs.google.com/document/d/1erv8-hVIIoxDAzDRjGqhpGs0Ww3sf4d5YPumJWXRMVg/edit)
