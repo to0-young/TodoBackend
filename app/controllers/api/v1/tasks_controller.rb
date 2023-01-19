@@ -24,14 +24,14 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
-  # def update
-  #   task = Task.find(params[:id])
-  #   if task.update params.permit(:title, :priority, :description, :dueDate )
-  #     render json: task, status: :ok
-  #   else
-  #     render json: { errors: task.errors.messages }, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    task = Task.find(params[:id])
+    if task.update params.require(:task).permit(:title, :priority, :description, :due_date )
+      render json: task, status: :ok
+    else
+      render json: { errors: "error" }, status: :unprocessable_entity
+    end
+  end
 
 
   def destroy
