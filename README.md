@@ -25,3 +25,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+git branch - ПОТОЧНИЙ БРАНЧ
+git checkout -b BRANCH_NAME - створює бранч
+git checkout BRANCH_NAME - переключається на бранч
+git branch -D BRANCH_NAME - видалить бранч
+git push origin BRANCH_NAME - пуш бранчі
