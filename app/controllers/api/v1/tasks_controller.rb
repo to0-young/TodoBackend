@@ -27,7 +27,7 @@ class Api::V1::TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
-    if task.update params.require(:task).permit(:title, :priority, :description, :due_date )
+    if task.update params.require(:task).permit(:title, :priority, :description, :due_date, :completed)
       render json: task, status: :ok
     else
       render json: { errors: "error" }, status: :unprocessable_entity
