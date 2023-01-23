@@ -22,6 +22,12 @@ require "faker"
     last_name: "joo",
   ).find_or_create_by!(email: "user_#{n}@gmail.com")
 
+50.times do |n|
+    Task.create_with(
+      due_date: DateTime.now,
+      priority: rand(1..10),
+      description: 'Sample desk 1'
+    ).find_or_create_by!(user_id: user.id, title: "RondomTask#{n}", )
+  end
 end
-
 
