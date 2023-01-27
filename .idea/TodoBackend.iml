@@ -77,6 +77,7 @@
     <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.3.3, RVM: ruby-3.1.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.8, RVM: ruby-3.1.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.13.10, RVM: ruby-3.1.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pagy (v6.0.1, RVM: ruby-3.1.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.4.5, RVM: ruby-3.1.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.14.1, RVM: ruby-3.1.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry-rails (v0.3.9, RVM: ruby-3.1.2) [gem]" level="application" />
@@ -149,6 +150,7 @@
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="serializer" />
         <option value="stimulus" />
         <option value="system_test" />
         <option value="task" />
@@ -203,6 +205,7 @@
         <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="serializer" />
         <option value="stimulus" />
         <option value="system_test" />
         <option value="task" />
@@ -415,9 +418,8 @@
           <RakeTaskImpl description="Run all specs in spec directory (excluding plugin specs)" fullCommand="spec" id="spec" />
           <RakeTaskImpl id="spec">
             <subtasks>
-              <RakeTaskImpl description="Run the code examples in spec/helpers" fullCommand="spec:helpers" id="helpers" />
+              <RakeTaskImpl description="Run the code examples in spec/controllers" fullCommand="spec:controllers" id="controllers" />
               <RakeTaskImpl description="Run the code examples in spec/models" fullCommand="spec:models" id="models" />
-              <RakeTaskImpl description="Run the code examples in spec/requests" fullCommand="spec:requests" id="requests" />
               <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
               <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />
             </subtasks>
