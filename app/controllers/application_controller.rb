@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   skip_before_action :verify_authenticity_token
   rescue_from JWT::ExpiredSignature, with: :session_expired!
   rescue_from JWT::DecodeError, with: :not_authorized!

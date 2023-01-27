@@ -2,9 +2,11 @@ class Api::V1::TasksController < ApplicationController
   before_action :authenticate!
 
   def index
+    # params[:page]
+    # params[:per_page]
     # tasks = Task.where(user_id: current_session.user_id)
-    tasks = current_user.tasks
-    render json: ActiveModelSerializers::SerializableResource.new(tasks).to_json, status: :ok
+    pagy, tasks = pagy(current_user.tasks.order(created_at: :asc), page: params[:page] , items: params[:per_page])
+    render json: { pagy: pagy  , tasks: ActiveModelSerializers::SerializableResource.new(tasks), status: :ok }
   end
 
   def show
