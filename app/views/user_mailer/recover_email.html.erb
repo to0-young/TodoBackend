@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h4>Welcome to <%= @front_end_url %>, <%= "#{@user.first_name.capitalize} #{@user.last_name.capitalize}" %></h4>
+    <p>
+      Someone requested a password recovery to your account, if is that you, please use this <%= link_to "URL", @recovery_url %> to proceed.<br>
+    </p>
+    <p>
+      To login to the site, just follow this <%= link_to "URL", @recovery_url %>
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
