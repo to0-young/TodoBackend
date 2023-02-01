@@ -16,7 +16,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= current_session&.user
+    @current_user ||= current_session&.user || authorized_user
+  end
+  def authorized_user
+    token = request.headers['Authorization']
+    return nil if token.nil?
+    binding.pry
+    decoded_token =  JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
+
   end
 
   def authenticate!
