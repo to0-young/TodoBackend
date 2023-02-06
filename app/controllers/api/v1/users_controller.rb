@@ -18,14 +18,13 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # def update
-  #   user = User.find(params[:id])
-  #   if user.update params.permit(:first_name, :last_name)
-  #     render json: user, status: :ok
-  #   else
-  #     render json: { errors: user.errors.messages }, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if current_user.update params.permit(:password, :password_confirmation)
+      render json: current_user, status: :ok
+    else
+      render json: { errors: current_user.errors.messages }, status: :unprocessable_entity
+    end
+  end
 
   # def destroy
   #   user = user.find(params[:id])
