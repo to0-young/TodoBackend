@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= current_session&.user || authorized_user
   end
+
   def authorized_user
     token = request.headers['Authorization']
     return nil if token.nil?
