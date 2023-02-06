@@ -21,9 +21,8 @@ class ApplicationController < ActionController::Base
   def authorized_user
     token = request.headers['Authorization']
     return nil if token.nil?
-    binding.pry
     decoded_token =  JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
-
+    @user || User.find(decoded_token[0]['user_id'])
   end
 
   def authenticate!

@@ -5,7 +5,7 @@ class Api::V1::ForgetPasswordsController < ApplicationController
       render json: { message: "User with this email does not exist"}, status: :not_found
     else
       UserMailer.with(user: user).recover_email.deliver_later
-      render json: { message: "Sent a recover email to user_0@gmail.com"}, status: :created
+      render json: { message: "Sent a recover email to 74.boyko@gmail.com"}, status: :created
     end
   end
 end
