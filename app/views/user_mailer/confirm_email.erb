@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+<h4>Welcome to <%= @front_end_url %>, <%= "#{@user.first_name.capitalize} #{@user.last_name.capitalize}" %></h4>
+<p>
+  Please confirm your email <%= link_to "URL", @confirm_url %>
+</p>
+</body>
+</html>

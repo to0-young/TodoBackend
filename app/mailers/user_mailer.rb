@@ -10,6 +10,15 @@ class UserMailer < ApplicationMailer
     @login_url = "#{@front_end_url}/login"
     mail(to: @user.email, subject: 'Your password change request' )
   end
+
+  def confirm_email
+    @user = params[:user]
+    set_payload = { user_id: @user.id }
+    confirm_token = JWT.encode(set_payload, Rails.application.credentials[:jwt_secret], 'HS256')
+    @front_end_url = Rails.application.credentials[:front_end_url]
+    @confirm_url = "#{@front_end_url}/confirm_email?confirm_token=#{confirm_token}"
+    mail(to: @user.email, subject: 'Your email confirm request')
+  end
 end
 
 
