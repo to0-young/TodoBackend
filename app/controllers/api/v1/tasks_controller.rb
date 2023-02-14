@@ -4,8 +4,8 @@ class Api::V1::TasksController < ApplicationController
   def index
     # params[:page]
     # params[:per_page]
-    # tasks = Task.where(user_id: current_session.user_id)
-    pagy, tasks = pagy(current_user.tasks.order(created_at: :asc), page: params[:page] , items: params[:per_page])
+    # tasks = Task.where(user_id: current_session.user_id
+    pagy, tasks = pagy(current_user.tasks.order( priority: :asc ), page: params[:page] , items: params[:per_page])
     render json: { pagy: pagy  , tasks: ActiveModelSerializers::SerializableResource.new(tasks), status: :ok }
   end
 
@@ -19,7 +19,6 @@ class Api::V1::TasksController < ApplicationController
     # task = Task.new(params.permit(:title, :priority,  :description, :due_date).merge(user_id: current_session.user_id))
     task = Task.new(params.permit(:title, :priority,  :description, :due_date))
     task.user_id = current_session.user_id
-
     if task.save
       render json: task, status: :created
     else
