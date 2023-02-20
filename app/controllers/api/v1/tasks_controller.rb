@@ -5,7 +5,9 @@ class Api::V1::TasksController < ApplicationController
     # params[:page]
     # params[:per_page]
     # tasks = Task.where(user_id: current_session.user_id
-    pagy, tasks = pagy(current_user.tasks.order( priority: :asc ), page: params[:page] , items: params[:per_page])
+    # binding.pry
+
+    pagy, tasks = pagy(current_user.tasks.order( "#{params[:sort_field]} #{params[:sort_order]}" ), page: params[:page] , items: params[:per_page])
     render json: { pagy: pagy  , tasks: ActiveModelSerializers::SerializableResource.new(tasks), status: :ok }
   end
 
@@ -43,6 +45,5 @@ class Api::V1::TasksController < ApplicationController
     render json: ActiveModelSerializers::SerializableResource.new(task).to_json, status: :ok
   end
 end
-
 
 
