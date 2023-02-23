@@ -70,6 +70,8 @@ Rails.application.configure do
       resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
     end
   end
+  config.hosts << "*"
+
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   # config.action.mailer.default_url_options = {:host => 'localhost:3000'}
