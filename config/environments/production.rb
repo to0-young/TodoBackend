@@ -84,7 +84,7 @@ Rails.application.configure do
       resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
     end
   end
-
+  config.hosts << "*"
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
@@ -94,7 +94,6 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
