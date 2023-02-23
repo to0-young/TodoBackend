@@ -34,13 +34,6 @@ module TodoBackend
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'http://localhost:3001'
-        resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
-      end
-    end
-
     config.hosts << "*"
   end
 end
