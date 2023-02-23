@@ -89,6 +89,6 @@ test:
 #
 production:
   <<: *default
-  database: Аproduction
+  database: production
   username: TodoBackend
   password: <%= ENV["TODOBACKEND_DATABASE_PASSWORD"] %>

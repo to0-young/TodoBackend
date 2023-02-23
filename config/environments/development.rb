@@ -64,7 +64,12 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
-
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'http://localhost:3001'
+      resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
+    end
+  end
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   # config.action.mailer.default_url_options = {:host => 'localhost:3000'}
