@@ -45,6 +45,9 @@ Rails.application.configure do
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
 
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
@@ -96,4 +99,17 @@ Rails.application.configure do
   end
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port:                 587,
+    domain:              'gmail.com',
+    user_name:            Rails.application.credentials[:support_email],
+    password:             Rails.application.credentials[:smtp_password],
+    authentication:      'plain',
+    enable_starttls_auto: true
+  }
+
 end
