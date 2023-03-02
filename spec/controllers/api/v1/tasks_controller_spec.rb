@@ -3,7 +3,12 @@ require 'rails_helper'
 RSpec.describe Api::V1::TasksController, type: :controller do
   describe "GET index" do
     let(:session) { create(:session) }
+    let(:user) { create(:user) }
     let!(:task) { create(:task, user_id: session.user_id) }
+
+    before do
+      allow(controller).to receive(:current_session).and_return(session)
+    end
 
     it 'when success' do
       allow(subject).to receive(:current_session).and_return(session)
@@ -14,8 +19,15 @@ RSpec.describe Api::V1::TasksController, type: :controller do
     end
 
     it "when unauthorized" do
+      allow(controller).to receive(:current_session).and_return(nil)
       get :index
       expect(response).to have_http_status(401)
+    end
+
+    it "returns the task when it exists" do
+      get :show, params: { id: task.id }
+      expect(response).to have_http_status(:ok)
+      expect(json[:id]).to eq(task.id)
     end
   end
 end
