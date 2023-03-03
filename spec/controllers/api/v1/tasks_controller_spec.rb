@@ -29,5 +29,17 @@ RSpec.describe Api::V1::TasksController, type: :controller do
       expect(response).to have_http_status(:ok)
       expect(json[:id]).to eq(task.id)
     end
+
+    before { get :show, params: { id: task.id } }
+
+    it 'returns a success response' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'returns JSON data for the task' do
+      json_data = JSON.parse(response.body)
+      expect(json_data['id']).to eq(task.id)
+      expect(json_data['title']).to eq(task.title)
+    end
   end
 end
