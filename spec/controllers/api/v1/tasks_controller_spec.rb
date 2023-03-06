@@ -11,8 +11,8 @@ RSpec.describe Api::V1::TasksController, type: :controller do
     end
 
     it 'when success' do
-      allow(subject).to receive(:current_session).and_return(session)
       get :index
+      allow(subject).to receive(:current_session).and_return(session)
       expect(response).to have_http_status(200)
       expect(json[:tasks].length).to be(1)
       expect(json[:tasks][0][:id]).to be(task.id)
@@ -31,13 +31,13 @@ RSpec.describe Api::V1::TasksController, type: :controller do
         expect(json[:id]).to eq(task.id)
       end
 
-      before { get :show, params: { id: task.id } }
-
       it 'returns a success response' do
+        get :show, params: { id: task.id }
         expect(response).to have_http_status(:ok)
       end
 
       it 'returns JSON data for the task' do
+        get :show, params: { id: task.id }
         json_data = JSON.parse(response.body)
         expect(json_data['id']).to eq(task.id)
         expect(json_data['title']).to eq(task.title)
