@@ -24,7 +24,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           put :update, params: { password: new_password }
         end
 
-        it "updates the user's password" do
+        it "updates the users password" do
           user.reload
           expect(user.authenticate(new_password))
         end
