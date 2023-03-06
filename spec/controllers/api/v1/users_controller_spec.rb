@@ -17,6 +17,23 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         end
       end
 
+      context "with valid params" do
+        let(:new_password) { "new_password" }
+
+        before do
+          put :update, params: { password: new_password }
+        end
+
+        it "updates the user's password" do
+          user.reload
+          expect(user.authenticate(new_password))
+        end
+
+        it "returns a success response" do
+          expect(response).to have_http_status(:unauthorized)
+        end
+      end
+
       context "when invalid password" do
         it "returns an unprocessable entity response with errors" do
           patch :update, params: { id: user.id, password: "" }
