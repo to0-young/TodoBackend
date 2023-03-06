@@ -87,7 +87,7 @@ Rails.application.configure do
       resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
     end
   end
-  config.hosts << "*"
+  config.hosts << "monkfish-app-tnh5h.ondigitalocean.app"
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")

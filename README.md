@@ -1,1 +1,1 @@
-# My first project Ruby on Rails and React js TodoList :)
+
