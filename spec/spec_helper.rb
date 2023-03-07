@@ -36,6 +36,9 @@ RSpec.configure do |config|
       DatabaseCleaner.cleaning do
         example.run
       end
+      # spec/rails_helper.rb
+      require "active_job/test_helper"
+      ActiveJob::Base.queue_adapter = :test
     end
   end
 

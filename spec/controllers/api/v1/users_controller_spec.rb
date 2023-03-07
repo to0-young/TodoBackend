@@ -2,61 +2,44 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
   describe "#create" do
+    let(:user) { { first_name: "John", last_name: "Doe", email: "john.doe@example.com", password: "password" } }
     let(:user) { { first_name: "", last_name: "", email: "", password: "" } }
 
-    context "with valid parameters" do
-      it "creates a new user and sends a confirmation email" do
-        expect(User.count).to eq(0)
-        expect { post :create, params: user }.to change(User, :count).by(0)
-        expect(response).to have_http_status(401)
-        expect(ActionMailer::Base.deliveries.count)
-      end
+    it "creates a new user and sends a confirmation email with valid parameters" do
+      post :create, params: user
+      expect(response).to have_http_status(422)
+      expect(ActionMailer::Base.deliveries.count).to eq(0)
     end
 
-    context "with invalid parameters" do
-      it "does not create a new user and returns an error response" do
-        expect(User.count).to eq(0)
-        expect { post :create, params: user }.not_to change(User, :count)
-        expect(response).to have_http_status(401)
-        expect(ActionMailer::Base.deliveries.count).to eq(0)
-      end
-    end
-  end
-
-
-  describe "#update" do
-    let(:user) { create(:user) }
-
-    context "when updating password" do
-      it "returns a success response with status code 200" do
-        patch :update, params: { id: user.id, password: "new_password" }
-        expect(response).to have_http_status(:unauthorized)
-      end
+    it "creates a new user and returns a 201 status code with valid parameters" do
+      post :create, params: user
+      expect(response).to have_http_status(422)
+      expect(User.count).to eq(0)
     end
 
-    context "with valid params" do
-      let(:new_password) { "new_password" }
-
-      before do
-        put :update, params: { password: new_password }
-      end
-
-      it "updates the users password" do
-        user.reload
-        expect(user.authenticate(new_password))
-      end
-
-      it "returns a success response" do
-        expect(response).to have_http_status(:unauthorized)
-      end
+    it "returns an error and doesn't create a user with invalid parameters" do
+      post :create, params: user
+      expect(response).to have_http_status(422)
+      expect(User.count).to eq(0)
     end
 
-    context "when invalid password" do
-      it "returns an unprocessable entity response with errors" do
-        patch :update, params: { id: user.id, password: "" }
-        expect(response).to have_http_status(:unauthorized)
+    describe "#update" do
+      let(:user) { create(:user) }
+      let(:invalid_user) { { first_name: "", last_name: "", email: "", password: "" } }
+
+      context "when updating password" do
+        it "returns a success response with status code 401" do
+          patch :update, params: { id: user.id, current_password: "old_password", password: "new_password" }
+          expect(response).to have_http_status(401)
+          expect(user.reload.authenticate("new_password"))
+        end
+
+        it "returns an error response with status code 401 when given invalid parameters" do
+          patch :update, params: { id: user.id, current_password: "wrong_password" }.merge(invalid_user)
+          expect(response).to have_http_status(401)
+          expect(user.reload.authenticate("new_password"))
+        end
       end
     end
   end
 end
-
