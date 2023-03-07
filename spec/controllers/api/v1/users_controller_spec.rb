@@ -11,7 +11,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(ActionMailer::Base.deliveries.count).to eq(0)
     end
 
-    it "creates a new user and returns a 201 status code with valid parameters" do
+    it "creates a new user and returns a 422 status code with valid parameters" do
       post :create, params: user
       expect(response).to have_http_status(422)
       expect(User.count).to eq(0)
