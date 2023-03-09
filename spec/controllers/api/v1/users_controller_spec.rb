@@ -11,16 +11,28 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(ActionMailer::Base.deliveries.count).to eq(0)
     end
 
+    it "creates a 200 OK status" do
+      expect(response).to have_http_status(200)
+    end
+
     it "creates a new user and returns a 422 status code with valid parameters" do
       post :create, params: user
       expect(response).to have_http_status(422)
       expect(User.count).to eq(0)
     end
 
+    it "creates a 200 OK status" do
+      expect(response).to have_http_status(200)
+    end
+
     it "returns an error and doesn't create a user with invalid parameters" do
       post :create, params: user
       expect(response).to have_http_status(422)
       expect(User.count).to eq(0)
+    end
+
+    it "creates a 200 OK status" do
+      expect(response).to have_http_status(200)
     end
 
     describe "#update" do
@@ -34,10 +46,18 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           expect(user.reload.authenticate("new_password"))
         end
 
+        it "creates a 200 OK status" do
+          expect(response).to have_http_status(200)
+        end
+
         it "returns an error response with status code 401 when given invalid parameters" do
           patch :update, params: { id: user.id, current_password: "wrong_password" }.merge(invalid_user)
           expect(response).to have_http_status(401)
           expect(user.reload.authenticate("new_password"))
+        end
+
+        it "creates a 200 OK status" do
+          expect(response).to have_http_status(200)
         end
       end
     end

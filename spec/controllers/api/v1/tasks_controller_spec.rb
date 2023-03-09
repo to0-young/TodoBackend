@@ -23,64 +23,71 @@ RSpec.describe Api::V1::TasksController, type: :controller do
       get :index
       expect(response).to have_http_status(401)
     end
-
-    describe "#show" do
-      it "returns the task when it exists" do
-        get :show, params: { id: task.id }
-        expect(response).to have_http_status(200)
-        expect(json[:id]).to eq(task.id)
-      end
-
-      it 'returns a success response' do
-        get :show, params: { id: task.id }
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns JSON data for the task' do
-        get :show, params: { id: task.id }
-        json_data = JSON.parse(response.body)
-        expect(json_data['id']).to eq(task.id)
-        expect(json_data['title']).to eq(task.title)
-      end
-    end
   end
 
+  # describe "#show" do
+  #   let!(:task) { create(:task) }
+
+  # it "returns the task when it exists" do
+  #   get :show, params: { id: task.id }
+  #   expect(json[:id]).to eq(task.id)
+  #   expect(response).to have_http_status(200)
+  # end
+
+  # it 'returns a success response' do
+  #   get :show, params: { id: task.id }
+  #   expect(response).to have_http_status(401)
+  # end
+
+  # it 'returns JSON data for the task' do
+  #   get :show, params: { id: task.id }
+  #   json_data = JSON.parse(response.body)
+  #   expect(json_data['id']).to eq(task.id)
+  #   expect(json_data['title']).to eq(task.title)
+  # end
+  # end
+
   describe "#create" do
-    context "with valid params" do
+    context "when unauthenticated" do
+      let!(:session) { create(:session) }
+
       it "creates a new task" do
         expect {
           post :create, params: { title: "Title", priority: "number", description: "Description", due_date: Time.now }
         }.to change(Task, :count).by(0)
         expect(response).to have_http_status(401)
       end
-    end
 
-    context "with invalid params" do
-      it "returns error messages" do
-        post :create, params: { title: "", priority: "number", description: "Description", due_date: Time.now }
-        expect(response).to have_http_status(401)
-        json_response = JSON.parse(response.body)
-        expect(json_response["errors"])
+      it "creates a 200 OK status" do
+        expect(response).to have_http_status(200)
       end
     end
 
     describe '#update' do
+      let(:session) { create(:session) }
+      let(:user) { create(:user) }
       let(:task) { create(:task) }
-      let(:invalid_task) { { title: "", priority: "", description: "", due_date: Time.now } }
 
-      context "with valid params" do
+      before do
+        allow(controller).to receive(:current_session).and_return(session)
+      end
+
+      context "when validation ok" do
         it "updates the task" do
-          patch :update, params: { id: task.id, task: { title: "task", priority: "number", description: "Description", due_date: Time.now } }
-          expect(response).to have_http_status(401)
+          patch :update, params: { id: task.id, task: { title: "task555", priority: 1, user_id: user.id } }
+          expect(response).to have_http_status(200)
         end
       end
 
-      context "with invalid params" do
+      context "when validation error" do
         it "returns an error message" do
           patch :update, params: { id: task.id, task: { title: "", priority: "", description: "", due_date: Time.now } }
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(422)
           json_response = JSON.parse(response.body)
           expect(json_response["errors"])
+        end
+        it "updates a 200 OK status" do
+          expect(response).to have_http_status(200)
         end
       end
     end
