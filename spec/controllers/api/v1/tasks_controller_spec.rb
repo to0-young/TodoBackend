@@ -25,27 +25,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
     end
   end
 
-  # describe "#show" do
-  #   let!(:task) { create(:task) }
-
-  # it "returns the task when it exists" do
-  #   get :show, params: { id: task.id }
-  #   expect(json[:id]).to eq(task.id)
-  #   expect(response).to have_http_status(200)
-  # end
-
-  # it 'returns a success response' do
-  #   get :show, params: { id: task.id }
-  #   expect(response).to have_http_status(401)
-  # end
-
-  # it 'returns JSON data for the task' do
-  #   get :show, params: { id: task.id }
-  #   json_data = JSON.parse(response.body)
-  #   expect(json_data['id']).to eq(task.id)
-  #   expect(json_data['title']).to eq(task.title)
-  # end
-  # end
 
   describe "#create" do
     context "when unauthenticated" do
@@ -62,6 +41,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
         expect(response).to have_http_status(200)
       end
     end
+
 
     describe '#update' do
       let(:session) { create(:session) }
@@ -83,12 +63,12 @@ RSpec.describe Api::V1::TasksController, type: :controller do
         it "returns an error message" do
           patch :update, params: { id: task.id, task: { title: "", priority: "", description: "", due_date: Time.now } }
           expect(response).to have_http_status(422)
-          json_response = JSON.parse(response.body)
-          expect(json_response["errors"])
         end
+
         it "updates a 200 OK status" do
           expect(response).to have_http_status(200)
         end
+
       end
     end
   end
