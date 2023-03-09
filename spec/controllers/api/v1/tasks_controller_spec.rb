@@ -44,5 +44,46 @@ RSpec.describe Api::V1::TasksController, type: :controller do
       end
     end
   end
+
+  describe "#create" do
+    context "with valid params" do
+      it "creates a new task" do
+        expect {
+          post :create, params: { title: "Title", priority: "number", description: "Description", due_date: Time.now }
+        }.to change(Task, :count).by(0)
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context "with invalid params" do
+      it "returns error messages" do
+        post :create, params: { title: "", priority: "number", description: "Description", due_date: Time.now }
+        expect(response).to have_http_status(401)
+        json_response = JSON.parse(response.body)
+        expect(json_response["errors"])
+      end
+    end
+
+    describe '#update' do
+      let(:task) { create(:task) }
+      let(:invalid_task) { { title: "", priority: "", description: "", due_date: Time.now } }
+
+      context "with valid params" do
+        it "updates the task" do
+          patch :update, params: { id: task.id, task: { title: "task", priority: "number", description: "Description", due_date: Time.now } }
+          expect(response).to have_http_status(401)
+        end
+      end
+
+      context "with invalid params" do
+        it "returns an error message" do
+          patch :update, params: { id: task.id, task: { title: "", priority: "", description: "", due_date: Time.now } }
+          expect(response).to have_http_status(401)
+          json_response = JSON.parse(response.body)
+          expect(json_response["errors"])
+        end
+      end
+    end
+  end
 end
 
