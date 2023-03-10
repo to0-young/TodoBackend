@@ -35,10 +35,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
         }.to change(Task, :count).by(0)
         expect(response).to have_http_status(401)
       end
-
-      it "creates a 200 OK status" do
-        expect(response).to have_http_status(200)
-      end
     end
 
 
@@ -62,10 +58,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
         it "returns an error message" do
           patch :update, params: { id: task.id, task: { title: "", priority: "", description: "", due_date: Time.now } }
           expect(response).to have_http_status(422)
-        end
-
-        it "updates a 200 OK status" do
-          expect(response).to have_http_status(200)
         end
       end
     end

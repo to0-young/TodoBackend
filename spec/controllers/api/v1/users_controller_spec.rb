@@ -5,8 +5,16 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     let(:user) { { first_name: "John", last_name: "Doe", email: "john.doe@example.com", password: "password" } }
 
     it "when users created" do
+      expect(User.count).to eq(0)
       post :create, params: user
       expect(response).to have_http_status(201)
+      expect(User.count).to eq(1)
+    end
+
+    it "When validation error" do
+      post :create, params: { first_name: "John", last_name: "Doe", email: "", password: "password" }
+      expect(response).to have_http_status(422)
+      expect(json[:errors]).not_to be_empty
     end
   end
 
