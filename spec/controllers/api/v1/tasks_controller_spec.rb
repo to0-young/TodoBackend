@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Api::V1::TasksController, type: :controller do
   describe "#index" do
     let(:session) { create(:session) }
-    let(:user) { create(:user) }
     let!(:task) { create(:task, user_id: session.user_id) }
 
     before do
@@ -68,7 +67,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
         it "updates a 200 OK status" do
           expect(response).to have_http_status(200)
         end
-
       end
     end
   end
