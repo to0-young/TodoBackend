@@ -64,6 +64,10 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem 'pry-rails'
+  # Gemfile
+  group :test do
+    gem 'database_cleaner-active_record'
+  end
 end
 
 group :development do
