@@ -8,7 +8,6 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       post :create, params: user
       expect(response).to have_http_status(201)
     end
-    
   end
 
   describe "#update" do
