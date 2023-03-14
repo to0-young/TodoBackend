@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-    not_authorized! if current_session.blank?
+    not_authorized! if current_user.blank?
   end
 
   def not_authorized!
