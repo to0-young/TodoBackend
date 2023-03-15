@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  mount_uploader :avatar, AvatarUploader
 
   has_many :sessions, dependent: :destroy
   has_many :tasks, dependent: :destroy
