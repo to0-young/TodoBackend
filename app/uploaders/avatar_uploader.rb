@@ -14,7 +14,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
-    "http://localhost:3000/uploads/#{model.class.to_s.underscore}/#{mounted_as}/default.jpeg"
+    # For Rails 3.1+ asset pipeline compatibility:
+    # asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+
+    "https://monkfish-app-tnh5h.ondigitalocean.app/uploads/#{model.class.to_s.underscore}/#{mounted_as}/default.jpeg"
+
+    # "http://localhost:3000/uploads/#{model.class.to_s.underscore}/#{mounted_as}/default.jpeg"
   end
 
   # Process files as they are uploaded:
