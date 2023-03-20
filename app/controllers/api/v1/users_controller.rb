@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
   # end
 
   def create
-    user = User.new params.permit(:first_name, :last_name, :email, :password)
+    user = User.new params.permit(:first_name, :last_name, :email, :password, :avatar)
     if user.save
       UserMailer.with(user: user).confirm_email.deliver_later
       render json:  { message: "Sent a confirm email to #{user.email}"}, status: :created
@@ -29,6 +29,7 @@ class Api::V1::UsersController < ApplicationController
       render json: { errors: current_user.errors.messages }, status: :unprocessable_entity
     end
   end
+
 
   # def destroy
   #   user = user.find(params[:id])
