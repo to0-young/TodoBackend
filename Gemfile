@@ -58,7 +58,8 @@ gem 'rack-cors'
 # gem "image_processing", "~> 1.2"
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem 'fog-aws'
-gem "mini_magick"
+# gem "mini_magick"
+gem 'rmagick'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

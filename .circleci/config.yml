@@ -18,6 +18,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install RMagic
+          command: sudo apt-get update; sudo apt-get install libmagickwand-dev
+      - run:
           name: Which bundler?
           command: bundle -v
       - run:

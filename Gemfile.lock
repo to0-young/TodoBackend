@@ -175,6 +175,7 @@ GEM
       racc (~> 1.4)
     pagy (6.0.1)
     pg (1.4.5)
+    pkg-config (1.5.1)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -218,6 +219,8 @@ GEM
     rake (13.0.6)
     reline (0.3.2)
       io-console (~> 0.5)
+    rmagick (5.2.0)
+      pkg-config (~> 1.4)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.0)
@@ -281,13 +284,13 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jwt
-  mini_magick
   pagy (~> 6.0.1)
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4)
+  rmagick
   rspec-rails
   sprockets-rails
   stimulus-rails
