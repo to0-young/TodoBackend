@@ -17,7 +17,7 @@ COPY Gemfile.lock /TodoBackend/Gemfile.lock
 RUN bundle check || bundle install
 
 
-# Add a script to be executed every time the container starts.
+# Додайте сценарій, який буде виконуватися щоразу, коли запускається контейнер.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
