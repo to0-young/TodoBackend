@@ -14,9 +14,7 @@ services:
 
   api:
     build: .
-
     container_name: newtodo_api
-
     environment:
       RAILS_DB_USER: sammy
       RAILS_DB_PASSWORD: 1
