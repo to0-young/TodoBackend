@@ -61,6 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+
   username: <%= ENV.fetch("RAILS_DB_USER") { 'postgres' } %>
   host: <%= ENV.fetch("RAILS_DB_HOST") { 'localhost' } %>
   password: <%= ENV.fetch("RAILS_DB_PASSWORD") { 1 } %>
