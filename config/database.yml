@@ -25,7 +25,7 @@ development:
   <<: *default
   username: <%= ENV.fetch("RAILS_DB_USER") { 'postgres' } %>
   host: <%= ENV.fetch("RAILS_DB_HOST") { 'localhost' } %>
-  password:  <%= ENV.fetch("DATABASE_PASSWORD") { 1 } %>
+  password: <%= ENV.fetch("RAILS_DB_PASSWORD") { 1 } %>
   database: TodoBackend_development
   port: <%= ENV.fetch("RAILS_DB_PORT") { 5432 } %>
 
@@ -61,9 +61,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  username:  <%= ENV.fetch("DATABASE_USER") { 'postgres' } %>
+
+  username: <%= ENV.fetch("RAILS_DB_USER") { 'postgres' } %>
   host: <%= ENV.fetch("RAILS_DB_HOST") { 'localhost' } %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { 1 } %>
+  password: <%= ENV.fetch("RAILS_DB_PASSWORD") { 1 } %>
   database: TodoBackend_test
   port: <%= ENV.fetch("RAILS_DB_PORT") { 5432 } %>
 

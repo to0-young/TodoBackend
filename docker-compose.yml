@@ -4,14 +4,19 @@ services:
     image: postgres
     volumes:
       - db_data:/var/lib/postgresql/data
+
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       #      POSTGRES_USER: postgres
       #      POSTGRES_PASSWORD: 1
+
       POSTGRES_HOST_AUTH_METHOD: trust
 
   api:
     build: .
+
+    container_name: newtodo_api
+
     environment:
       RAILS_DB_USER: sammy
       RAILS_DB_PASSWORD: 1

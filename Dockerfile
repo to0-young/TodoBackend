@@ -1,6 +1,7 @@
 # Використовуємо офіційний образ Ruby з версією 3.1.2
 FROM ruby:3.1.2
 
+
 # Оновлюємо пакетний менеджер та встановлюємо залежності: Node.js та PostgreSQL клієнт
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client libmagickwand-dev libpq-dev postgresql-client-common postgresql-client
 
@@ -15,8 +16,8 @@ COPY Gemfile.lock /TodoBackend/Gemfile.lock
 # Встановлюємо всі геми, вказані в Gemfile та Gemfile.lock
 RUN bundle check || bundle install
 
+# Додайте сценарій, який буде виконуватися щоразу, коли запускається контейнер.
 
-# Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
