@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  db:
+    image: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      #      POSTGRES_USER: postgres
+      #      POSTGRES_PASSWORD: 1
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  api:
+    build: .
+    environment:
+      RAILS_DB_USER: sammy
+      RAILS_DB_PASSWORD: 1
+      RAILS_DB_HOST: db
+    volumes:
+      - .:/TodoBackend
+      - gem_cache:/usr/local/bundle/gems
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  gem_cache:
+  db_data:
