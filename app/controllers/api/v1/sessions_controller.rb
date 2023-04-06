@@ -31,7 +31,7 @@ class Api::V1::SessionsController < ApplicationController
     token = JWT.encode(exp_payload, Rails.application.credentials[:jwt_secret], 'HS256')
 
     # засетити цей токен в куки
-    cookies[:session] = { value: token, expires: 24.hours }
+    cookies[:session] = { value: token, expires: 24.hours, domain: request.host, same_site: :none, secure: true }
 
     # повернути 201 респонс із меседжом, що все добре
      render json: ActiveModelSerializers::SerializableResource.new(current_session).to_json, status: 201
@@ -45,9 +45,13 @@ class Api::V1::SessionsController < ApplicationController
     # ЗААПДЕЙТИТИ КАРЕНТ СЕШЕН EXPIRATION DateTime.now
     current_session.update(expiration: DateTime.now)
     # видалити сесію з куки
-    cookies.delete(:session)
+    cookies.delete(:session, domain: request.host)
     # повернути 200 статус
     render json: { message: 'ок' }, status: 200
   end
+
+  # def frontend_host
+  #   Rails.application.credentials[:front_end_url].gsub('https://', '')
+  # end
 end
 

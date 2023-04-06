@@ -25,7 +25,6 @@ development:
   <<: *default
   username: <%= ENV.fetch("RAILS_DB_USER") { 'postgres' } %>
   host: <%= ENV.fetch("RAILS_DB_HOST") { 'localhost' } %>
-  password: <%= ENV.fetch("RAILS_DB_PASSWORD") { 1 } %>
   database: TodoBackend_development
   port: <%= ENV.fetch("RAILS_DB_PORT") { 5432 } %>
 
@@ -90,6 +89,8 @@ test:
 #
 production:
   <<: *default
-  database: production
-  username: TodoBackend
-  password: <%= ENV["TODOBACKEND_DATABASE_PASSWORD"] %>
+  username: <%= Rails.application.credentials[:pg_user] %>
+  host: <%= Rails.application.credentials[:pg_host] %>
+  password: <%= Rails.application.credentials[:pg_password] %>
+  database: Rails.application.credentials[:pg_database]
+  port: <%= Rails.application.credentials[:pg_port] %>

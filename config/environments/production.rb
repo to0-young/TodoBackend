@@ -87,7 +87,10 @@ Rails.application.configure do
       resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
     end
   end
-  config.hosts << "monkfish-app-tnh5h.ondigitalocean.app"
+
+  config.hosts << Rails.application.credentials[:front_end_url].gsub('https://', '')
+  config.hosts << Rails.application.credentials[:backend_url].gsub('https://', '')
+
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
