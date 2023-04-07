@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
     end
     # знайти_юзера в БД по імейлу з параметрів
     user = User.find_by_email(params[:email])
-    #
+
     # якщо юзер ніл, то відіслати 404 статус із словами, що такого юзер немає
     if user.nil?
       # перевірити чи пароль, який ти надаєш співпадає з паролем знайденого юзера в БД
@@ -49,9 +49,5 @@ class Api::V1::SessionsController < ApplicationController
     # повернути 200 статус
     render json: { message: 'ок' }, status: 200
   end
-
-  # def frontend_host
-  #   Rails.application.credentials[:front_end_url].gsub('https://', '')
-  # end
 end
 
