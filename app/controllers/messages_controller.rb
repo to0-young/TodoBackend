@@ -1,14 +1,9 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: %i[ show edit update destroy ]
+  # before_action :set_message, only: %i[ show edit update destroy ]
 
   # GET /messages or /messages.json
   def index
-    @messages = Message.all
-  end
-
-    # GET /messages/new
-  def new
-    @message = Message.new
+    render json: Message.all
   end
 
   # POST /messages or /messages.json
