@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     render json: Message.all
   end
 
+
   # POST /messages or /messages.json
   def create
     @message = Message.new(message_params)
