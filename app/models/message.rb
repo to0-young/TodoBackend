@@ -5,9 +5,7 @@ class Message < ApplicationRecord
   private
 
   def broadcast_message
-    ActionCable.server.broadcast('MessagesChannel', {
-      id:,
-      body:,
-    })
+    ActionCable.server.broadcast('MessagesChannel',
+      ActiveModelSerializers::SerializableResource.new(self))
   end
 end
