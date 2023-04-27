@@ -3,20 +3,20 @@ class MessagesController < ApplicationController
 
   # GET /messages or /messages.json
   def index
-    render json: Message.all
+    messages = Message.all
+    render json: messages
   end
 
 
   # POST /messages or /messages.json
   def create
-    @message = Message.new(message_params)
+    message = Message.new(message_params)
+    message.user_id = current_user.id
 
-    respond_to do |format|
-      if @message.save
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+    if message.save
+      render json: ActiveModelSerializers::SerializableResource.new(message).to_json, status: :ok
+    else
+      render json: { errors: message.errors }, status: :unprocessable_entity
     end
   end
 
