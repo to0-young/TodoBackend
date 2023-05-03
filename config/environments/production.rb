@@ -46,7 +46,6 @@ Rails.application.configure do
 
   config.action_cable.allowed_request_origins = [ "https://todo-abc.herokuapp.com", /\/\/.*\.todo-abc\.herokuapp\.com/ ]
 
-  ################
 
 
 
