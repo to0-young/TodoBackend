@@ -43,7 +43,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
-  config.action_cable.allowed_request_origins = [ "http://todo-abc.herokuapp.com", /http:\/\/.*\.todo-abc\.herokuapp\.com/ ]
+  config.action_cable.allowed_request_origins = ['*']
 
 
   # Don't care if the mailer can't send.
