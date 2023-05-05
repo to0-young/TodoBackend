@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  # before_action :set_message, only: %i[ show edit update destroy ]
 
   # GET /messages or /messages.json
   def index
@@ -20,14 +19,13 @@ class MessagesController < ApplicationController
     end
   end
 
-  # DELETE /messages/1 or /messages/1.json
-  # def destroy
-  #   @message.destroy
-  #
-  #   respond_to do |format|
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy
+    message = current_user.message.find(params[:id])
+    message&.destroy
+
+    render json: ActiveModelSerializers::SerializableResource.new(message).to_json, status: :ok
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
