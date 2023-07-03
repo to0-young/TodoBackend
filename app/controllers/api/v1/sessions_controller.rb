@@ -31,7 +31,7 @@ class Api::V1::SessionsController < ApplicationController
     token = JWT.encode(exp_payload, Rails.application.credentials[:jwt_secret], 'HS256')
 
     # засетити цей токен в куки
-    cookies[:session] = { value: token, expires: 24.hours, domain: request.host, same_site: :none, secure: true }
+    cookies[:session] = { value: token, expires: 24.hours, domain: request.host, secure: false }
 
     # повернути 201 респонс із меседжом, що все добре
      render json: ActiveModelSerializers::SerializableResource.new(current_session).to_json, status: 201
