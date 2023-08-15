@@ -78,7 +78,7 @@ test:
 #
 # If the connection URL is provided in the special DATABASE_URL environment
 # variable, Rails will automatically merge its configuration values on top of
-# the values provided in this file. Alternatively, you can specify a connection
+# the values provided in this file. Alternatively, you can specify a con``nection
 # URL environment variable explicitly:
 #
 #   production:
@@ -92,5 +92,4 @@ production:
   username: <%= Rails.application.credentials[:pg_user] %>
   host: <%= Rails.application.credentials[:pg_host] %>
   password: <%= Rails.application.credentials[:pg_password] %>
-  database: Rails.application.credentials[:pg_database]
   port: <%= Rails.application.credentials[:pg_port] %>
