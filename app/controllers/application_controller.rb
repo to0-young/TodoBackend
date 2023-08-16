@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   def current_session
     @current_session ||= begin
       token = cookies[:session]
+      p '@@@@@'
+      p '@@@@@token@@@@@@'
+      p token
+      p '@@@@@'
+      p '@@@@@'
       return nil if token.nil?
       decoded_token = JWT.decode(token, Rails.application.credentials[:jwt_secret], true, { algorithm: 'HS256' })
       session_id = decoded_token[0]['session_id']
