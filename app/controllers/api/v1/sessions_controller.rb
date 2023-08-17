@@ -19,6 +19,7 @@ class Api::V1::SessionsController < ApplicationController
       correct_password = user.authenticate(params[:password])
       if correct_password == false
         # якщо не співпадає повернути статус 401 із меседжом, що твій пароль не правильний
+        return render json: { message: 'Password not valid' }, status: 401
       end
     end
     exp = 24.hours.from_now
