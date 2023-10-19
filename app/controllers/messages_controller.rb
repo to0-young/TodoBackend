@@ -1,11 +1,9 @@
 class MessagesController < ApplicationController
-
   # GET /messages or /messages.json
   def index
     messages = Message.all
     render json: messages
   end
-
 
   # POST /messages or /messages.json
   def create
@@ -19,12 +17,14 @@ class MessagesController < ApplicationController
     end
   end
 
+
+  # Delete a message by the current user
   def destroy
     message = current_user.message.find(params[:id])
     message&.destroy
-
     render json: ActiveModelSerializers::SerializableResource.new(message).to_json, status: :ok
   end
+
 
 
   private
