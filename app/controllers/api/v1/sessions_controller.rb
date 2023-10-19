@@ -33,7 +33,7 @@ class Api::V1::SessionsController < ApplicationController
     # засетити цей токен в куки
 
     cookies[:session] = { value: token, expires: 24.hours, domain: request.host, secure: Rails.application.credentials[:jwt_secure] }
-        # cookies[:session] = { value: token, expires: 24.hours, same_site: :none, secure: Rails.application.credentials[:jwt_secure] }
+    # cookies[:session] = { value: token, expires: 24.hours, same_site: :none, secure: Rails.application.credentials[:jwt_secure] }
 
 
 
