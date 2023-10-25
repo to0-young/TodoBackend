@@ -3,8 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.3"
 
+# ActiveAdmin
+gem 'activeadmin'
+
 # jwt sessions
 gem 'jwt'
+
+gem 'ransack'
+
 # Connecting the heme cellalyzer
 gem 'active_model_serializers', '~> 0.10.0'
 
@@ -53,6 +59,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 gem 'rack-cors'
+gem 'sassc'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
