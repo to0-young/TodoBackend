@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
+  ActiveAdmin.routes(self)
 
   resources :messages, only: [:index, :create, :destroy]
   namespace :api do
