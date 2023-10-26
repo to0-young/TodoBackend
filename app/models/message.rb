@@ -14,4 +14,8 @@ class Message < ApplicationRecord
       id: id,
       type: "message_deleted" }
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["body", "created_at", "due_date", "id", "updated_at", "user_id"]
+  end
 end
