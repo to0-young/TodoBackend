@@ -5,6 +5,8 @@ ruby "3.1.2"
 
 # ActiveAdmin
 gem 'activeadmin'
+gem 'devise'
+gem 'ransack'
 
 # jwt sessions
 gem 'jwt'
