@@ -11,8 +11,6 @@ gem 'ransack'
 # jwt sessions
 gem 'jwt'
 
-gem 'ransack'
-
 # Connecting the heme cellalyzer
 gem 'active_model_serializers', '~> 0.10.0'
 
