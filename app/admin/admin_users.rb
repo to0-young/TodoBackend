@@ -21,6 +21,7 @@ ActiveAdmin.register AdminUser do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :avatar, as: :file
     end
     f.actions
   end
