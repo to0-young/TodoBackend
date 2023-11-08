@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
     use_iam_profile:       false,                         # optional, defaults to false
     region:                'fra1',                  # optional, defaults to 'us-east-1'
     host:                  'todo-backet.fra1.digitaloceanspaces.com',             # optional, defaults to nil
-    endpoint:              'https://todo-backet.fra1.digitaloceanspaces.com' # optional, defaults to nil
+    endpoint:              'http://localhost:3000' # optional, defaults to nil
   }
   config.fog_directory  = 'todo-backet'                                      # required
   config.fog_public     = false                                                 # optional, defaults to true
@@ -16,3 +16,4 @@ CarrierWave.configure do |config|
   # uncomment the line :file instead of the default :storage.  Otherwise, it will use AWS as the temp cache store.
   # config.cache_storage = :file
 end
+
