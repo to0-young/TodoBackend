@@ -7,10 +7,12 @@ CarrierWave.configure do |config|
     use_iam_profile:       false,                         # optional, defaults to false
     region:                'fra1',                  # optional, defaults to 'us-east-1'
     host:                  'todo-backet.fra1.digitaloceanspaces.com',             # optional, defaults to nil
-    endpoint:              'http://localhost:3000' # optional, defaults to nil
+    endpoint:              'http://192.168.1.101:3000' # optional, defaults to nil
   }
 
-  config.asset_host = "http://localhost:3000"
+  # config.asset_host = "http://localhost:3000"  # локально тільки для веба
+  config.asset_host = "http://192.168.1.101:3000"  # локально  для мобайла і веба
+
   config.fog_directory  = 'todo-backet'                                      # required
   config.fog_public     = false                                                 # optional, defaults to true
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
