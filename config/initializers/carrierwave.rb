@@ -9,6 +9,8 @@ CarrierWave.configure do |config|
     host:                  'todo-backet.fra1.digitaloceanspaces.com',             # optional, defaults to nil
     endpoint:              'http://localhost:3000' # optional, defaults to nil
   }
+
+  config.asset_host = "http://localhost:3000"
   config.fog_directory  = 'todo-backet'                                      # required
   config.fog_public     = false                                                 # optional, defaults to true
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
