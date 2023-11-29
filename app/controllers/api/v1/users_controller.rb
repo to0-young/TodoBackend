@@ -30,16 +30,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  private
-
-  def user_params
-    params.permit(:first_name, :last_name, :email, :password, :avatar)
-  end
-
-  def user_update_params
-    params.permit(:password, :password_confirmation, :email_confirmed, :avatar)
-  end
-
 
   # def destroy
   #   user = user.find(params[:id])
