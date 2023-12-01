@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if current_user.update params.permit(:password, :password_confirmation, :email_confirmed)
+    if current_user.update params.permit(:password, :password_confirmation, :email_confirmed, :avatar)
       render json: current_user, status: :ok
     else
       render json: { errors: current_user.errors.messages }, status: :unprocessable_entity
