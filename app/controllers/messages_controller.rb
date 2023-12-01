@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
 
   # Delete a message by the current user
   def destroy
-    message = current_user.message.find(params[:id])
+    message = current_user.messages.find(params[:id])
     message&.destroy
     render json: ActiveModelSerializers::SerializableResource.new(message).to_json, status: :ok
   end

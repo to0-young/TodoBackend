@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_update_params)
+    if curre
       render json: current_user, status: :ok
     else
       render json: { errors: current_user.errors.messages }, status: :unprocessable_entity
