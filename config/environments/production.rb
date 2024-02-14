@@ -85,12 +85,6 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins Rails.application.credentials[:front_end_url]
-      resource '*', credentials: true, headers: :any, methods: [:get, :post, :patch, :put, :delete]
-    end
-  end
 
   config.hosts << Rails.application.credentials[:front_end_url].gsub('https://', '')
   config.hosts << Rails.application.credentials[:backend_url].gsub('https://', '')
