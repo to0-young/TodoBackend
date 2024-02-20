@@ -9,8 +9,9 @@ class Api::V1::GoogleController < ApplicationController
     # Якщо користувача не знайдено, створити нового користувача
     if user.nil?
       user = User.create!(email: google_data[:email],
-                          first_name: google_data[:first_name],
-                          last_name: google_data[:last_name],
+
+                         first_name: google_data[:first_name],
+                         last_name: google_data[:last_name],
                           password: google_data[:google_id],
                           password_confirmation: google_data[:google_id],
                           email_confirmed: true)

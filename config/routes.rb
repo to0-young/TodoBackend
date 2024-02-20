@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users, :tasks, :forget_passwords
       resource :sessions, :users
 
+      
       post '/google', to: 'google#create'
     end
   end
