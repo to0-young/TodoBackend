@@ -32,6 +32,7 @@ class Api::V1::GoogleController < ApplicationController
 
     # повернути 201 респонс із меседжом, що все добре
     render json: ActiveModelSerializers::SerializableResource.new(current_session).to_json, status: :created
+
   end
 
   private
