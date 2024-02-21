@@ -84,7 +84,6 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
   config.hosts << Rails.application.credentials[:front_end_url].gsub('https://', '')
   config.hosts << Rails.application.credentials[:backend_url].gsub('https://', '')
 

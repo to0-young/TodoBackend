@@ -7,13 +7,14 @@ CarrierWave.configure do |config|
     use_iam_profile:       false,                         # optional, defaults to false
     region:                'fra1',                  # optional, defaults to 'us-east-1'
     host:                  'todo-backet.fra1.digitaloceanspaces.com',             # optional, defaults to nil
-    # endpoint:              'http://192.168.1.101:3000' # optional, defaults to nil
-    endpoint:              'http://192.168.31.101:3000' # optional, defaults to nil
+    # endpoint:              'http://192.168.1.101:3000'  #  work
+    endpoint:              'http://192.168.31.101:3000' #  home
   }
 
-  # config.asset_host = "http://localhost:3000"  # локально тільки для веба
-  # config.asset_host = "http://192.168.1.101:3000"  # локально  для мобайла і веба
-  config.asset_host = "http://192.168.31.101:3000"  # локально  для мобайла і веба
+  config.asset_host = "http://localhost:3000"   #  локальцо для всього
+
+  # config.asset_host = "http://192.168.1.101:3000"  # work  local all web and mobile app
+  config.asset_host = "http://192.168.31.101:3000"  # home  local all web and mobile app
 
   config.fog_directory  = 'todo-backet'                                      # required
   config.fog_public     = false                                                 # optional, defaults to true

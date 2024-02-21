@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, :tasks, :forget_passwords
       resource :sessions, :users
-
       post '/google', to: 'google#create'
     end
   end
