@@ -1,12 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate!, only: :update
 
-
-  # def index
-  #   users = User.all
-  #   render json: users
-  # end
-
   # def show
   #   user = User.find(params[:id])
   #   render json: user, except: :password
@@ -29,7 +23,6 @@ class Api::V1::UsersController < ApplicationController
       render json: { errors: current_user.errors.messages }, status: :unprocessable_entity
     end
   end
-
 
   # def destroy
   #   user = user.find(params[:id])

@@ -38,6 +38,7 @@ class Api::V1::SessionsController < ApplicationController
      render json: ActiveModelSerializers::SerializableResource.new(current_session).to_json, status: :created
   end
 
+
   def destroy
     # якщо карент сесії немає - повернути 401 статус з меседжом session missing
     if current_session.nil?
