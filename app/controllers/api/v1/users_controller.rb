@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
   # end
 
   def create
-    user = User.new(user_params)
+    user = User.new params.permit(:first_name, :last_name, :email, :password, :avatar)
     if user.save
       UserMailer.with(user: user).confirm_email.deliver_later
       render json: { message: "Sent a confirm email to #{user.email}"}, status: :created
@@ -17,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if curre
+    if current_user.update params.permit(:password, :password_confirmation, :email_confirmed, :avatar)
       render json: current_user, status: :ok
     else
       render json: { errors: current_user.errors.messages }, status: :unprocessable_entity
